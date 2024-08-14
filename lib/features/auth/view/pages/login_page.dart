@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harmoniz/core/theme/app_pallete.dart';
+import 'package:harmoniz/features/auth/repositories/auth_remote_repository.dart';
+import 'package:harmoniz/features/auth/view/pages/signup_pages.dart';
 import 'package:harmoniz/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:harmoniz/features/auth/view/widgets/custom_field.dart';
 
@@ -51,22 +53,37 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20),
               AuthGradientButton(
                 buttonText: 'Sign In',
-                onTap: () {},
+                onTap: () async {
+                  await AuthRemoteRepository().login(
+                    email: emailController.text,
+                    password: passwordController.text,
+                  );
+                },
               ),
               const SizedBox(height: 20),
-              RichText(
-                text: TextSpan(
-                  text: 'Don\'t have an account? ',
-                  style: Theme.of(context).textTheme.titleMedium,
-                  children: const [
-                    TextSpan(
-                      text: 'Sign Un',
-                      style: TextStyle(
-                        color: Pallete.gradient2,
-                        fontWeight: FontWeight.bold,
-                      ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignupPages(),
                     ),
-                  ],
+                  );
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Don\'t have an account? ',
+                    style: Theme.of(context).textTheme.titleMedium,
+                    children: const [
+                      TextSpan(
+                        text: 'Sign Up',
+                        style: TextStyle(
+                          color: Pallete.gradient2,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

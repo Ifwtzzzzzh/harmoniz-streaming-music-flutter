@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:harmoniz/core/theme/app_pallete.dart';
 import 'package:harmoniz/features/auth/repositories/auth_remote_repository.dart';
 import 'package:harmoniz/features/auth/view/pages/signup_pages.dart';
@@ -54,10 +55,15 @@ class _LoginPageState extends State<LoginPage> {
               AuthGradientButton(
                 buttonText: 'Sign In',
                 onTap: () async {
-                  await AuthRemoteRepository().login(
+                  final res = await AuthRemoteRepository().login(
                     email: emailController.text,
                     password: passwordController.text,
                   );
+                  final val = switch (res) {
+                    Left(value: final l) => l,
+                    Right(value: final r) => r,
+                  };
+                  print(val);
                 },
               ),
               const SizedBox(height: 20),

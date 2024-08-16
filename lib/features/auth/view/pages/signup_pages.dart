@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:fpdart/fpdart.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:harmoniz/core/theme/app_pallete.dart';
-import 'package:harmoniz/features/auth/repositories/auth_remote_repository.dart';
 import 'package:harmoniz/features/auth/view/pages/login_page.dart';
 import 'package:harmoniz/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:harmoniz/features/auth/view/widgets/custom_field.dart';
+import 'package:harmoniz/features/auth/viewmodel/auth_viewmodel.dart';
 
-class SignupPages extends StatefulWidget {
+class SignupPages extends ConsumerStatefulWidget {
   const SignupPages({super.key});
 
   @override
-  State<SignupPages> createState() => _SignupPagesState();
+  ConsumerState<SignupPages> createState() => _SignupPagesState();
 }
 
-class _SignupPagesState extends State<SignupPages> {
+class _SignupPagesState extends ConsumerState<SignupPages> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -29,6 +29,7 @@ class _SignupPagesState extends State<SignupPages> {
 
   @override
   Widget build(BuildContext context) {
+    final val = ref.watch(authViewmodelProvider);
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -59,16 +60,12 @@ class _SignupPagesState extends State<SignupPages> {
               AuthGradientButton(
                 buttonText: 'Sign Up',
                 onTap: () async {
-                  final res = await AuthRemoteRepository().signup(
-                    name: nameController.text,
-                    email: emailController.text,
-                    password: passwordController.text,
-                  );
-                  final val = switch (res) {
-                    Left(value: final l) => l,
-                    Right(value: final r) => r.name,
-                  };
-                  print(val);
+                  if (formKey.currentState!.validate()) {
+                    await ref.read(authViewmodelProvider.notifier).signUpUser(
+                        name: nameController.text,
+                        email: emailController.text,
+                        password: passwordController.text);
+                  }
                 },
               ),
               const SizedBox(height: 20),

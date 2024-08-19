@@ -31,7 +31,8 @@ class _SignupPagesState extends ConsumerState<SignupPages> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(authViewmodelProvider)?.isLoading == true;
+    final isLoading = ref
+        .watch(authViewmodelProvider.select((val) => val?.isLoading == true));
     ref.listen(authViewmodelProvider, (_, next) {
       next?.when(
         data: (data) {
@@ -89,6 +90,8 @@ class _SignupPagesState extends ConsumerState<SignupPages> {
                                   name: nameController.text,
                                   email: emailController.text,
                                   password: passwordController.text);
+                        } else {
+                          showSnackBar(context, 'Missing fields!');
                         }
                       },
                     ),

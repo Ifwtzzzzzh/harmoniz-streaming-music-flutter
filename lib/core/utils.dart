@@ -33,7 +33,7 @@ Future<File?> pickAudio() async {
       type: FileType.audio,
     );
     if (filePickerRes != null) {
-      return File(filePickerRes!.files.first.xFile.path);
+      return File(filePickerRes.files.first.xFile.path);
     }
     return null;
   } catch (e) {

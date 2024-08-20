@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:harmoniz/core/theme/app_pallete.dart';
 import 'package:harmoniz/core/utils.dart';
 import 'package:harmoniz/core/widgets/custom_field.dart';
+import 'package:harmoniz/features/home/view/widgets/audio_wave.dart';
 
 class UploadSongPage extends ConsumerStatefulWidget {
   const UploadSongPage({super.key});
@@ -101,12 +102,14 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
                       ),
               ),
               const SizedBox(height: 40),
-              CustomField(
-                hintText: 'Pick Song',
-                controller: null,
-                readOnly: true,
-                onTap: () {},
-              ),
+              selectedAudio != null
+                  ? AudioWave(path: selectedAudio!.path)
+                  : CustomField(
+                      hintText: 'Pick Song',
+                      controller: null,
+                      readOnly: true,
+                      onTap: () {},
+                    ),
               const SizedBox(height: 20),
               CustomField(
                 hintText: 'Artist',

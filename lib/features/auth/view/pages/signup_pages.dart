@@ -5,7 +5,7 @@ import 'package:harmoniz/core/utils.dart';
 import 'package:harmoniz/core/widgets/loader.dart';
 import 'package:harmoniz/features/auth/view/pages/login_page.dart';
 import 'package:harmoniz/features/auth/view/widgets/auth_gradient_button.dart';
-import 'package:harmoniz/features/auth/view/widgets/custom_field.dart';
+import 'package:harmoniz/core/widgets/custom_field.dart';
 import 'package:harmoniz/features/auth/viewmodel/auth_viewmodel.dart';
 
 class SignupPages extends ConsumerStatefulWidget {

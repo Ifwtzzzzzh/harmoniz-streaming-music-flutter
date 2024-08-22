@@ -30,7 +30,7 @@ Future<File?> pickImage() async {
 Future<File?> pickAudio() async {
   try {
     final filePickerRes = await FilePicker.platform.pickFiles(
-      type: FileType.audio,
+      type: FileType.any,
     );
     if (filePickerRes != null) {
       return File(filePickerRes.files.first.xFile.path);

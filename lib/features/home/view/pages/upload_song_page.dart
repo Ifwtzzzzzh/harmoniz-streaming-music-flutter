@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:harmoniz/core/theme/app_pallete.dart';
 import 'package:harmoniz/core/utils.dart';
 import 'package:harmoniz/core/widgets/custom_field.dart';
+import 'package:harmoniz/features/home/repositories/home_repository.dart';
 import 'package:harmoniz/features/home/view/widgets/audio_wave.dart';
 
 class UploadSongPage extends ConsumerStatefulWidget {
@@ -27,7 +28,7 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
     final pickedAudio = await pickAudio();
     if (pickedAudio != null) {
       setState(() {
-        selectedImage = pickedAudio;
+        selectedAudio = pickedAudio;
       });
     }
   }
@@ -55,7 +56,12 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
         title: const Text('Upload Song'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              HomeRepository().uploadSong(
+                selectedImage!,
+                selectedAudio!,
+              );
+            },
             icon: const Icon(Icons.check),
           ),
         ],
@@ -108,7 +114,7 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
                       hintText: 'Pick Song',
                       controller: null,
                       readOnly: true,
-                      onTap: () {},
+                      onTap: selectAudio,
                     ),
               const SizedBox(height: 20),
               CustomField(

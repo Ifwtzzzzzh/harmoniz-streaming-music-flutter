@@ -4,7 +4,7 @@ import 'package:harmoniz/core/providers/current_user_notifier.dart';
 import 'package:harmoniz/core/theme/theme.dart';
 import 'package:harmoniz/features/auth/view/pages/signup_pages.dart';
 import 'package:harmoniz/features/auth/viewmodel/auth_viewmodel.dart';
-import 'package:harmoniz/features/home/view/pages/upload_song_page.dart';
+import 'package:harmoniz/features/home/view/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +28,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Harmoniz - Streaming Music App',
       theme: AppTheme.darkThemeMode,
-      home: currentUser == null ? const SignupPages() : const UploadSongPage(),
+      home: currentUser == null ? const SignupPages() : const HomePage(),
     );
   }
 }

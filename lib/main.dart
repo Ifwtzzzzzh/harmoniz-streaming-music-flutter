@@ -5,9 +5,20 @@ import 'package:harmoniz/core/theme/theme.dart';
 import 'package:harmoniz/features/auth/view/pages/signup_pages.dart';
 import 'package:harmoniz/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:harmoniz/features/home/view/pages/home_page.dart';
+import 'package:hive/hive.dart';
+import 'package:just_audio_background/just_audio_background.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
+
+  final dir = await getApplicationDocumentsDirectory();
+  Hive.defaultDirectory = dir.path;
   final container = ProviderContainer();
   await container.read(authViewmodelProvider.notifier).initSharedPreferences();
   await container.read(authViewmodelProvider.notifier).getData();

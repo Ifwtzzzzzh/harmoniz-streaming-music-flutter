@@ -5,6 +5,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:harmoniz/core/providers/current_user_notifier.dart';
 import 'package:harmoniz/core/utils.dart';
 import 'package:harmoniz/features/home/model/song_model.dart';
+import 'package:harmoniz/features/home/repositories/home_local_repository.dart';
 import 'package:harmoniz/features/home/repositories/home_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -23,9 +24,13 @@ Future<List<SongModel>> getAllSongs(GetAllSongsRef ref) async {
 @riverpod
 class HomeViewmodel extends _$HomeViewmodel {
   late HomeRepository _homeRepository;
+  late HomeLocalRepository _homeLocalRepository;
+
   @override
   AsyncValue? build() {
     _homeRepository = ref.watch(homeRepositoryProvider);
+    // ignore: avoid_manual_providers_as_generated_provider_dependency
+    _homeLocalRepository = ref.watch(homeLocalRepositoryProvider);
     return null;
   }
 
@@ -52,5 +57,9 @@ class HomeViewmodel extends _$HomeViewmodel {
       Right(value: final r) => state = AsyncValue.data(r),
     };
     print(val);
+  }
+
+  List<SongModel> getRecentlyPlayedSongs() {
+    return _homeLocalRepository.loadSongs();
   }
 }

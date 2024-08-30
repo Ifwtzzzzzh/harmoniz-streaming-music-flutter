@@ -1,16 +1,27 @@
-# harmoniz
+# 🎶 Harmoniz - Streaming Music App
 
-A new Flutter project.
+Immerse yourself in the world of Harmoniz, where every beat resonates with your soul. Discover new artists, create personalized playlists, and enjoy high-fidelity sound that brings your music to life. With HarmoniX, your musical journey is always in perfect harmony.
 
-## Getting Started
+# Tech Stack **👩‍💻**
 
-This project is a starting point for a Flutter application.
+- Flutter
+- Riverpod
+- FastAPI
+- PostgreSQL
 
-A few resources to get you started if this is your first Flutter project:
+# Package 📦
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- http
+- fpdart
+- flutter_riverpod
+- riverpod_annotation
+- riverpod_lint
+- riverpod_generator
+- build_runner
+- custom_lint
+- shared_preferences
+- dotted_border
+- flex_color_picker
+- file_picker
+- audio_waveforms
+- just_audio

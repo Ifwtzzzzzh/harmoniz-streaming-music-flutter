@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:fpdart/fpdart.dart';
 import 'package:harmoniz/core/constants/server_constant.dart';
-import 'package:harmoniz/features/auth/model/user_model.dart';
+import 'package:harmoniz/core/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

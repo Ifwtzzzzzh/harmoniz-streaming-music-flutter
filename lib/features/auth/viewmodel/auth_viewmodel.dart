@@ -2,7 +2,7 @@
 
 import 'package:fpdart/fpdart.dart';
 import 'package:harmoniz/core/providers/current_user_notifier.dart';
-import 'package:harmoniz/features/auth/model/user_model.dart';
+import 'package:harmoniz/core/models/user_model.dart';
 import 'package:harmoniz/features/auth/repositories/auth_local_repository.dart';
 import 'package:harmoniz/features/auth/repositories/auth_remote_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:harmoniz/core/providers/current_song_notifier.dart';
+import 'package:harmoniz/core/providers/current_user_notifier.dart';
 import 'package:harmoniz/core/theme/app_pallete.dart';
 import 'package:harmoniz/core/utils.dart';
+import 'package:harmoniz/features/home/viewmodel/home_viewmodel.dart';
 
 class MusicPlayer extends ConsumerWidget {
   const MusicPlayer({super.key});
@@ -12,6 +14,8 @@ class MusicPlayer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentSong = ref.watch(currentSongNotifierProvider);
     final songNotifier = ref.read(currentSongNotifierProvider.notifier);
+    final userFavorites = ref
+        .watch(currentUserNotifierProvider.select((data) => data!.favorites));
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -97,9 +101,20 @@ class MusicPlayer extends ConsumerWidget {
                       ),
                       const Expanded(child: SizedBox()),
                       IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          CupertinoIcons.heart,
+                        onPressed: () async {
+                          await ref
+                              .read(homeViewmodelProvider.notifier)
+                              .favSong(
+                                songId: currentSong.id,
+                              );
+                        },
+                        icon: Icon(
+                          userFavorites
+                                  .where((fav) => fav.song_id == currentSong.id)
+                                  .toList()
+                                  .isNotEmpty
+                              ? CupertinoIcons.heart_fill
+                              : CupertinoIcons.heart,
                           color: Pallete.whiteColor,
                         ),
                       ),
